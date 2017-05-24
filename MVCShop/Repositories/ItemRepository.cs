@@ -11,6 +11,8 @@ namespace MVCShop.Repositories
     {
         StoreContext context = new StoreContext();
 
+        public object StoreContext { get; internal set; }
+
         public IEnumerable<StockItem> GetAllItems()
         {
             return context.Items.ToList();
@@ -18,8 +20,11 @@ namespace MVCShop.Repositories
 
         public void AddNewItem(StockItem item)
         {
-            context.Items.Add(item);
-            context.SaveChanges();
+            if (CheckShelfPosition(item) == false)
+            {
+                context.Items.Add(item);
+                context.SaveChanges();
+            }
         }
 
         public void RemoveItem(StockItem item)
@@ -28,7 +33,7 @@ namespace MVCShop.Repositories
             context.SaveChanges();
         }
 
-        public StockItem SearchItemsByArtNum(int ArtNum)
+        public StockItem DetailsByArtNum(int? ArtNum)
         {
             return context.Items.SingleOrDefault(item => item.ArticleNumber == ArtNum);
         }
@@ -39,6 +44,21 @@ namespace MVCShop.Repositories
                         where item.Price == price || item.Name == name
                         select item;
             return query;
+        }
+
+        public void Edit(StockItem item)
+        {
+            context.Entry(item).State = System.Data.Entity.EntityState.Modified;
+            context.SaveChanges();
+        }
+
+        public bool CheckShelfPosition(StockItem item)
+        {
+            if (context.Items.Any(i => i.ShelfPosition == item.ShelfPosition))
+            {
+                return true;
+            }
+            else return false;
         }
     }
 }

@@ -20,6 +20,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -118,7 +119,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\StockItemsController.cs" />
+    <Compile Include="Controllers\StockItemController.cs" />
     <Compile Include="DataAccess\StoreContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -172,11 +173,11 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\StockItems\Create.cshtml" />
-    <Content Include="Views\StockItems\Delete.cshtml" />
-    <Content Include="Views\StockItems\Details.cshtml" />
-    <Content Include="Views\StockItems\Edit.cshtml" />
-    <Content Include="Views\StockItems\Index.cshtml" />
+    <Content Include="Views\StockItem\Index.cshtml" />
+    <Content Include="Views\StockItem\Details.cshtml" />
+    <Content Include="Views\StockItem\Create.cshtml" />
+    <Content Include="Views\StockItem\Edit.cshtml" />
+    <Content Include="Views\StockItem\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201705231146068_initial.resx">
@@ -190,6 +191,7 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

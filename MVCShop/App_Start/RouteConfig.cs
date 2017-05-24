@@ -16,7 +16,7 @@ namespace MVCShop
             routes.MapRoute(
                 name: "View Items",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "StockItems", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "StockItem", action = "Index", id = UrlParameter.Optional }
 
             );
 
