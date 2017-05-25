@@ -38,11 +38,20 @@ namespace MVCShop.Repositories
             return context.Items.SingleOrDefault(item => item.ArticleNumber == ArtNum);
         }
 
-        public IEnumerable<StockItem> SearchByPriceOrName(double price, string name)
+        public List<StockItem> DeleteMultiple(int id)
         {
-            var query = from item in context.Items
-                        where item.Price == price || item.Name == name
-                        select item;
+            var query = (from i in context.Items
+                         where i.ArticleNumber == id
+                         select i).ToList();
+
+            return query;
+        }
+
+        public IEnumerable<StockItem> SearchByPriceOrName(string searchTerm = null)
+        {
+            var query = from i in context.Items
+                        where searchTerm == null || i.Name.StartsWith(searchTerm)
+                        select i;
             return query;
         }
 
@@ -59,6 +68,22 @@ namespace MVCShop.Repositories
                 return true;
             }
             else return false;
+        }
+
+        public void DeleteMultiple(int? id)
+        {
+            if (id != null)
+            {
+                var query = (from i in context.Items
+                 where i.ArticleNumber == id
+                 select i).ToList();
+
+                foreach (var i in query)
+                {
+                    context.Items.Remove(i);
+                }
+                context.SaveChanges();  
+            }
         }
     }
 }

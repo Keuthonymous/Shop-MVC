@@ -19,9 +19,9 @@ namespace MVCShop.Controllers
         }
 
         // GET: StockItem
-        public ActionResult Index()
+        public ActionResult Index(string searchTerm = null)
         {
-            return View(repo.GetAllItems());
+            return View(repo.SearchByPriceOrName(searchTerm));
         }
 
         public ActionResult Details(int id)
@@ -50,6 +50,15 @@ namespace MVCShop.Controllers
             StockItem item = repo.DetailsByArtNum(id);
             repo.RemoveItem(item);
             return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public ActionResult DeleteSelected(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest)
+            }
         }
 
         [HttpGet]
