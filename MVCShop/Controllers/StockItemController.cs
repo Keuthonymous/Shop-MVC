@@ -53,12 +53,32 @@ namespace MVCShop.Controllers
         }
 
         [HttpGet]
-        public ActionResult DeleteSelected(int? id)
+        public ActionResult DeleteSelected(int[] deleteInputs)
         {
-            if (id == null)
+            if (deleteInputs == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            List<StockItem> removeList = repo.GetByArtNum(deleteInputs);
+            if (deleteInputs == null)
+            {
+                return HttpNotFound();
+            }
+            return View(removeList);
+        }
+
+        [HttpPost, ActionName("DeleteSelected")]
+        public ActionResult DeleteSelectedConfirm(int[] deleteInputs)
+        {
+            List<StockItem> removeList = repo.GetByArtNum(deleteInputs);
+            if (removeList != null)
+            {
+                foreach (var item in removeList)
+                {
+                    repo.RemoveItem(item);
+                }
+            }
+            return RedirectToAction("Index");
         }
 
         [HttpGet]

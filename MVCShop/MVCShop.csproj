@@ -178,6 +178,7 @@
     <Content Include="Views\StockItem\Create.cshtml" />
     <Content Include="Views\StockItem\Edit.cshtml" />
     <Content Include="Views\StockItem\Delete.cshtml" />
+    <Content Include="Views\StockItem\DeleteSelected.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201705231146068_initial.resx">

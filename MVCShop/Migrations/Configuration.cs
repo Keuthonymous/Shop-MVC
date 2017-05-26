@@ -9,7 +9,7 @@ namespace MVCShop.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(MVCShop.DataAccess.StoreContext context)
@@ -21,6 +21,14 @@ namespace MVCShop.Migrations
                 new Models.StockItem { ArticleNumber = 1434, Name = "Logitech G502 Proteus Spectrum", Price = 949.99, Quantity = 1, Description = "Computer Mouse", ShelfPosition = "A3" },
                 new Models.StockItem { ArticleNumber = 1534, Name = "SteelSeries G6 V2", Price = 599.99, Quantity = 1, Description = "Keyboard", ShelfPosition = "A4" }
                 );
+
+            for (int i = 0; i < 1000; i += 1)
+            {
+                context.Items.AddOrUpdate(
+                    item => item.ArticleNumber,
+                    new Models.StockItem { Name = i.ToString(), Price = 19.99, Quantity = 1, Description = "Something" }
+                    );
+            }
         }
     }
 }

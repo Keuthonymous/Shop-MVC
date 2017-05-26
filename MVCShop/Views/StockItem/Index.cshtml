@@ -6,14 +6,18 @@
 
 <h2>Index</h2>
 <form method="get">
-    <input type="search"  name="searchTerm"/>
+    <input type="search" name="searchTerm" />
     <input type="submit" value="Search by name" />
 </form>
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+@{Html.BeginForm("DeleteSelected", "StockItem", FormMethod.Post, new { name = "tableForm" });}
 <table class="table">
     <tr>
+        <th>
+            <p>Select</p>
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
@@ -32,32 +36,39 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.CheckBox("DeleteSelected", false, new { id = item.ArticleNumber}) |
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ShelfPosition)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Quantity)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ArticleNumber }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ArticleNumber }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ArticleNumber }) |
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <input type="checkbox" name="deleteInputs" value="@item.ArticleNumber" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShelfPosition)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ArticleNumber }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ArticleNumber }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ArticleNumber }) 
+            </td>
+        </tr>
+    }
 
 </table>
+<div class="actions">
+    <a href="javascript:(function(){document.tableForm.submit();return void(0)})()">
+        Delete Selected
+    </a>
+</div>
+@{Html.EndForm(); }
