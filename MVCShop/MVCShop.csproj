@@ -157,6 +157,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\shopMVC.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -179,6 +180,7 @@
     <Content Include="Views\StockItem\Edit.cshtml" />
     <Content Include="Views\StockItem\Delete.cshtml" />
     <Content Include="Views\StockItem\DeleteSelected.cshtml" />
+    <Content Include="Views\StockItem\_Items.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201705231146068_initial.resx">

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Helpers;
 
 namespace MVCShop.Repositories
 {
@@ -68,6 +69,15 @@ namespace MVCShop.Repositories
                 return true;
             }
             else return false;
+        }
+
+        public IEnumerable<StockItem> Autocomplete(string term)
+        {
+            var query = from i in context.Items
+                         where i.Name.StartsWith(term)
+                         select i;
+
+            return query;
         }
     }
 }

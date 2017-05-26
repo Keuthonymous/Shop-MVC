@@ -18,10 +18,26 @@ namespace MVCShop.Controllers
             repo = new ItemRepository();
         }
 
+
+        public ActionResult Autocomplete(string term)
+        {
+            var AutocompleteList = repo.Autocomplete(term);
+
+            var query = (from i in AutocompleteList
+                         select new { label = i.Name }).Take(10);
+
+            return Json(query, JsonRequestBehavior.AllowGet);
+        }
         // GET: StockItem
         public ActionResult Index(string searchTerm = null)
         {
+        
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("_Items", repo.SearchByPriceOrName(searchTerm));
+            }
             return View(repo.SearchByPriceOrName(searchTerm));
+
         }
 
         public ActionResult Details(int id)
