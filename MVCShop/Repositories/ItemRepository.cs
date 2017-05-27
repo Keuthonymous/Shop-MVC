@@ -70,14 +70,5 @@ namespace MVCShop.Repositories
             }
             else return false;
         }
-
-        public IEnumerable<StockItem> Autocomplete(string term)
-        {
-            var query = from i in context.Items
-                         where i.Name.StartsWith(term)
-                         select i;
-
-            return query;
-        }
     }
 }

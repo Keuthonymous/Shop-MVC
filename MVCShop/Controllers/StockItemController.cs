@@ -21,9 +21,10 @@ namespace MVCShop.Controllers
 
         public ActionResult Autocomplete(string term)
         {
-            var AutocompleteList = repo.Autocomplete(term);
+            var AutocompleteList = repo.GetAllItems();
 
             var query = (from i in AutocompleteList
+                         where i.Name.StartsWith(term)
                          select new { label = i.Name }).Take(10);
 
             return Json(query, JsonRequestBehavior.AllowGet);
