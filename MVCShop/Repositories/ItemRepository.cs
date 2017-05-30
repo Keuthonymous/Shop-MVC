@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Helpers;
+using PagedList.Mvc;
+using PagedList;
 
 namespace MVCShop.Repositories
 {
@@ -50,9 +52,10 @@ namespace MVCShop.Repositories
 
         public IEnumerable<StockItem> SearchByPriceOrName(string searchTerm = null)
         {
-            var query = (from i in context.Items
+            var query = from i in context.Items
                         where searchTerm == null || i.Name.StartsWith(searchTerm)
-                        select i).Take(10);
+                        orderby i.ArticleNumber
+                        select i;
             return query;
         }
 
