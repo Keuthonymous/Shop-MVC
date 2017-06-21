@@ -135,7 +135,9 @@
       <DependentUpon>201705231146068_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Category.cs" />
     <Compile Include="Models\StockItem.cs" />
+    <Compile Include="Models\StockShelf.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ItemRepository.cs" />
   </ItemGroup>

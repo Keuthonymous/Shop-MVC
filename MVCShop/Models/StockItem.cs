@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MVCShop.Models
 {
@@ -17,11 +18,16 @@ namespace MVCShop.Models
 
         [Range (0.1,100000)]
         public double Price { get; set; }
-        public string ShelfPosition { get; set; }
         public int Quantity { get; set; }
 
         [Required]
         [StringLength(140)]
-        public string Description { get; set; }
+        public string ItemDescription { get; set; }
+
+        public virtual ICollection<Category> Categories { get; set; }
+
+        [ForeignKey("StockShelf")]
+        public int StockShelfID { get; set; }
+        public virtual StockShelf StockShelf { get; set; }
     }   
 }
