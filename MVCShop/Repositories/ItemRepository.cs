@@ -21,14 +21,14 @@ namespace MVCShop.Repositories
             return context.Items.ToList();
         }
 
-        public void AddNewItem(StockItem item)
-        {
-            if (CheckShelfPosition(item) == false)
-            {
-                context.Items.Add(item);
-                context.SaveChanges();
-            }
-        }
+        //public void AddNewItem(StockItem item)
+        //{
+        //    if (CheckShelfPosition(item) == false)
+        //    {
+        //        context.Items.Add(item);
+        //        context.SaveChanges();
+        //    }
+        //}
 
         public void RemoveItem(StockItem item)
         {
@@ -65,13 +65,5 @@ namespace MVCShop.Repositories
             context.SaveChanges();
         }
 
-        public bool CheckShelfPosition(StockItem item)
-        {
-            if (context.Items.Any(i => i.ShelfPosition == item.ShelfPosition))
-            {
-                return true;
-            }
-            else return false;
-        }
     }
 }

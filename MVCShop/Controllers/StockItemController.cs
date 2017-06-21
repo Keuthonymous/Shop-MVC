@@ -105,16 +105,16 @@ namespace MVCShop.Controllers
             return View();
         }
 
-        [HttpPost]
-        public ActionResult Create([Bind(Include = "ArticleNumber, Name, Price, ShelfPosition, Quantity, Description")] StockItem item)
-        {
-            if (ModelState.IsValid && repo.CheckShelfPosition(item) == false)
-            {
-                repo.AddNewItem(item);
-                return RedirectToAction("Index");
-            }
-            return View(item);
-        }
+        //[HttpPost]
+        //public ActionResult Create([Bind(Include = "ArticleNumber, Name, Price, ShelfPosition, Quantity, Description")] StockItem item)
+        //{
+        //    if (ModelState.IsValid && repo.CheckShelfPosition(item) == false)
+        //    {
+        //        repo.AddNewItem(item);
+        //        return RedirectToAction("Index");
+        //    }
+        //    return View(item);
+        //}
 
         [HttpGet]
         public ActionResult Edit(int? id)

@@ -1,5 +1,6 @@
 namespace MVCShop.Migrations
 {
+    using MVCShop.Models;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -16,19 +17,25 @@ namespace MVCShop.Migrations
         {
             context.Items.AddOrUpdate(
                 i => i.ArticleNumber,
-                new Models.StockItem { ArticleNumber = 1234, Name = "Monster", Price = 20.99, Quantity = 2, Description = "Energy Drink", ShelfPosition = "A1" },
-                new Models.StockItem { ArticleNumber = 1334, Name = "RedBull", Price = 16.99, Quantity = 3, Description = "Energy Drink", ShelfPosition = "A2" },
-                new Models.StockItem { ArticleNumber = 1434, Name = "Logitech G502 Proteus Spectrum", Price = 949.99, Quantity = 1, Description = "Computer Mouse", ShelfPosition = "A3" },
-                new Models.StockItem { ArticleNumber = 1534, Name = "SteelSeries G6 V2", Price = 599.99, Quantity = 1, Description = "Keyboard", ShelfPosition = "A4" }
+                new StockItem { ArticleNumber = 1234, Name = "Monster", Price = 20.99, Quantity = 2 },
+                new StockItem { ArticleNumber = 1334, Name = "RedBull", Price = 16.99, Quantity = 3 },
+                new StockItem { ArticleNumber = 1434, Name = "Logitech G502 Proteus Spectrum", Price = 949.99, Quantity = 1 },
+                new StockItem { ArticleNumber = 1534, Name = "SteelSeries G6 V2", Price = 599.99, Quantity = 1 }
                 );
 
-            for (int i = 0; i < 1000; i += 1)
-            {
-                context.Items.AddOrUpdate(
-                    item => item.ArticleNumber,
-                    new Models.StockItem { Name = i.ToString(), Price = 19.99, Quantity = 1, Description = "Something" }
-                    );
-            }
+            context.Categories.AddOrUpdate(
+                c => c.ID,
+                new Category { Name = "Food", IsAgeRestricted = false, CatDescription = "This is food" },
+                new Category { Name = "Alcohol", IsAgeRestricted = true, CatDescription = "This is booze" },
+                new Category { Name = "Electronics", IsAgeRestricted = false, CatDescription = "These are fun things" }
+                );
+
+            context.Shelves.AddOrUpdate(
+                s => s.ID,
+                new StockShelf { ShelfName = "A1" },
+                new StockShelf { ShelfName = "A2" },
+                new StockShelf { ShelfName = "A3" }
+                );
         }
     }
 }
